@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <main class="centered">
+        <h1>Id : <%= person.id %></h1>
+        <h2>Name : <%= person.name %></h2>
+        <hr>
+        <p>Address : <%= person.address %></p>
+        <p>Sector : <%= person.sector %></p>
+        <p>Vaccine Name : <%= person.vaccine %></p>
+        <p>Dose : <%= person.dose %></p>
+        <p>Date : <%= person.vaccineDate %></p>
+        <p>EC Number : <%= person.ecNo %></p>
+
+    </main>
+<%- include('includes/end.ejs') %>
