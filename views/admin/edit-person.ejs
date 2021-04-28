@@ -20,7 +20,10 @@
             </div>
             <div class="form-control">
                 <label for="Vaccine">Vaccine Name</label>
-                <input type="text" name="Vaccine" id="Vaccine" value="<% if (editing) { %><%= person.vaccine %><% } %>">
+                <select id="Vaccine" name="Vaccine">
+                    <option value="covishield" <% if (editing && person.vaccine == "covishield") { %><%= selected="selected" %><% } %>>Covishield</option>
+                    <option value="covaxin" <% if (editing && person.vaccine == "covaxin")  { %><%= selected="selected" %><% } %>>Covaxin</option>
+                </select>
             </div>
             <div class="form-control">
                 <label for="Dose">Dose</label>
