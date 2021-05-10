@@ -7,13 +7,19 @@
             <li class="main-header__item">
                 <a class="<%= path==='search' ? 'active':''%>" href="/search">Search</a>
             </li>
+            <% if (isAuthenticated) { %>
             <li class="main-header__item">
                 <a class="<%= path==='admin/people' ? 'active':''%>" href="/admin/people">Admin People List</a>
             </li>
             <li class="main-header__item">
                 <a class="<%= path==='admin/add-person' ? 'active':''%>" href="/admin/add-person">Add Person</a>
             </li>
-            
+            <% } %>
+        </ul>
+        <ul class="main-header__item-list">
+            <li class="main-header__item">
+                <a class="<%= path==='/login' ? 'active':''%>" href="/login">Login</a>
+            </li>
         </ul>
     </nav>
 </header>

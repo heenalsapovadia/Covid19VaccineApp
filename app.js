@@ -12,14 +12,8 @@ app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
 const peopleRoutes = require('./routes/people');
+const authRoutes = require('./routes/auth');
 
-db.execute('SELECT * FROM people')
-    .then(result => {
-        console.log(result[0]);
-    })
-    .catch(err => {
-        console.log(err);
-    });
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,6 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', adminRoutes);
 
 app.use(peopleRoutes);
+
+app.use(authRoutes);
 
 app.use(errorController.get404);
 app.listen(3000);

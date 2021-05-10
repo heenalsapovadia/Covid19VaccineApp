@@ -5,7 +5,8 @@ exports.getAddPerson = (req, res, next)=>{
     res.render('admin/edit-person', { 
         pageTitle: 'Add Person', 
         path: 'admin/add-person',
-        editing: false
+        editing: false,
+        isAuthenticated: req.isLoggedIn
     });
 };
 
@@ -43,7 +44,8 @@ exports.getEditPerson = (req, res, next)=>{
                 pageTitle: 'Edit Person',
                 path: 'admin/edit-person',
                 editing: editMode,
-                person: row[0]
+                person: row[0],
+                isAuthenticated: req.isLoggedIn
             });
         })
         .catch(err => {
@@ -76,7 +78,8 @@ exports.getPeople = (req, res, next)=>{
             res.render('admin/people-list', { 
                 pageTitle: 'People', 
                 path: 'admin/people',
-                peeps: rows
+                peeps: rows,
+                isAuthenticated: req.isLoggedIn
             });
         })
         .catch(err => {

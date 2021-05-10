@@ -7,7 +7,8 @@ exports.getPeople = (req, res, next)=>{
             res.render('people', { 
                 pageTitle: 'People', 
                 path: '/',
-                peeps: rows
+                peeps: rows,
+                isAuthenticated: req.isLoggedIn
             });
         })
         .catch(err => {
@@ -26,7 +27,8 @@ exports.getPerson = (req, res, next)=>{
             res.render('person-detail', { 
                 pageTitle: 'Summary', 
                 path: '/people',
-                person: row[0]
+                person: row[0],
+                isAuthenticated: req.isLoggedIn
             });
         })
         .catch(err => {
@@ -37,7 +39,8 @@ exports.getPerson = (req, res, next)=>{
 exports.getSearch = (req, res, next) => {
     res.render('searchBy', {
         pageTitle: 'Search',
-        path: 'search'
+        path: 'search',
+        isAuthenticated: req.isLoggedIn
     });
 };
 exports.postSearch = (req, res, next) => {
