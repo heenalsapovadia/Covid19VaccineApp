@@ -2,8 +2,8 @@
 const Person = require('../models/person');
 
 exports.getPeople = (req, res, next)=>{
-    const people = Person.fetchAll()
-        .then(([rows, fieldData]) => {
+    Person.fetchAll()
+        .then((rows) => {
             res.render('people', { 
                 pageTitle: 'People', 
                 path: '/',
@@ -19,14 +19,14 @@ exports.getPerson = (req, res, next)=>{
     const id = req.params.personId;
     console.log(id);
     Person.findById(id)
-        .then(([row]) => {
-            console.log("finding by id",row);
-            console.log(row[0].vaccineDate);
-            console.log(typeof row[0].vaccineDate);
+        .then((person) => {
+            console.log("finding by id",person);
+            console.log(person.vaccineDate);
+            console.log(typeof person.vaccineDate);
             res.render('person-detail', { 
                 pageTitle: 'Summary', 
                 path: '/people',
-                person: row[0]
+                person: person
             });
         })
         .catch(err => {
@@ -44,14 +44,14 @@ exports.postSearch = (req, res, next) => {
     console.log(req.body.id);
     const id = req.body.id;
     Person.findById(id)
-        .then(([row]) => {
-            console.log("finding by id",row);
-            console.log(row[0].vaccineDate);
-            console.log(typeof row[0].vaccineDate);
+        .then((person) => {
+            console.log("finding by id",person);
+            console.log(person.vaccineDate);
+            console.log(typeof person.vaccineDate);
             res.render('person-detail', { 
                 pageTitle: 'Summary', 
                 path: '/people',
-                person: row[0]
+                person: person
             });
         })
         .catch(err => {

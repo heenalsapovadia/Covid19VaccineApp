@@ -1,13 +1,28 @@
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
+const mongodb = require("mongodb");
+const MongoClient = mongodb.MongoClient;
 
-// pool of db connections - pick one connection for every query 
-// and return it back to the pool once the query execution is finished
-// reduces the time to create a new db connection for every new query and close it
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'covid-vaccine-app',
-    password: 'root'
-});                                      
+let _db; // _ signals that the variable will only be used internally in this file
 
-module.exports = pool.promise(); // doubt!
+const mongoConnect = (callback) => {
+  MongoClient.connect(
+    "mongodb+srv://heenal:heenal25@cluster0.snlhj.mongodb.net/covid-vaccine-app?retryWrites=true&w=majority"
+  )
+    .then((client) => {
+      _db = client.db();
+      callback();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const getDb = () => {
+  if (_db) {
+    return _db;
+  }
+  throw "No database found!";
+};
+
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;

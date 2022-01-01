@@ -1,7 +1,6 @@
 const Person = require('../models/person');
 
 exports.getAddPerson = (req, res, next)=>{
-    // res.send("<h1>Add new Vaccinated Person Details here!</h1>");
     res.render('admin/edit-person', { 
         pageTitle: 'Add Person', 
         path: 'admin/add-person',
@@ -10,10 +9,6 @@ exports.getAddPerson = (req, res, next)=>{
 };
 
 exports.postAddPerson = (req, res, next)=>{
-    // res.send('<h1>Vaccinated Person Added!');
-    // console.log(req.body);
-    // people.push({ title: req.body.Name });
-    // const person = new Person(req.body.Name);
     const name = req.body.Name;
     const address = req.body.Address;
     const sector = req.body.Sector;
@@ -29,7 +24,6 @@ exports.postAddPerson = (req, res, next)=>{
         .catch(err => {
             console.log(err);
         });
-    
 };
 
 exports.getEditPerson = (req, res, next)=>{
@@ -37,13 +31,13 @@ exports.getEditPerson = (req, res, next)=>{
     if(!editMode) return res.redirect('/');
     const personId = req.params.personId;
     Person.findById(personId)
-        .then(([row]) => {
-            console.log(row[0].vaccineDate);
+        .then((person) => {
+            console.log(person.vaccineDate);
             res.render('admin/edit-person', {
                 pageTitle: 'Edit Person',
                 path: 'admin/edit-person',
                 editing: editMode,
-                person: row[0]
+                person: person
             });
         })
         .catch(err => {
@@ -51,6 +45,7 @@ exports.getEditPerson = (req, res, next)=>{
         });
     
 };
+
 exports.postEditPerson = (req, res, next)=>{
     const id = req.body.personId;
     const name = req.body.Name;
@@ -61,7 +56,7 @@ exports.postEditPerson = (req, res, next)=>{
     const date = req.body.Date;
     const ecn = req.body.ECN;
     const person = new Person(id, name, address, sector, vaccine, dose, date, ecn);
-    person.update()
+    person.save()
         .then(() => {
             res.redirect('/');
         })
@@ -72,7 +67,7 @@ exports.postEditPerson = (req, res, next)=>{
 
 exports.getPeople = (req, res, next)=>{
     Person.fetchAll()
-        .then(([rows, fieldData]) => {
+        .then((rows) => {
             res.render('admin/people-list', { 
                 pageTitle: 'People', 
                 path: 'admin/people',

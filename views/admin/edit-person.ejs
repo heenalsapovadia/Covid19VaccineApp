@@ -28,16 +28,16 @@
             </div>
             <div class="form-control">
                 <label for="Date">Vaccine Date</label>
-                <input type="date" name="Date" id="Date" value="<% if (editing) { %><%= person.vaccineDate %><% } %>">
+                <input type="date" name="Date" id="Date" value="<% if (editing) { %><%= person.date %><% } %>">
             </div>
             <div class="form-control">
                 <label for="ECN">EC Number</label>
-                <input type="number" name="ECN" id="ECN" value="<% if (editing) { %><%= person.ecNo %><% } %>">
+                <input type="number" name="ECN" id="ECN" value="<% if (editing) { %><%= person.ecn %><% } %>">
             </div>
             <% if (editing) { %>
-                <input type="hidden" name="personId" value="<%= person.id %>">
+                <input type="hidden" name="personId" value="<%= person._id %>">
             <% } %>
-            <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Person<% } %></button>
+            <button class="btn" type="submit"><% if (editing) { %>Update Person<% } else { %>Add Person<% } %></button>
         </form>
     </main>
 <%- include('../includes/end.ejs') %>
